@@ -1,7 +1,7 @@
 # AppHelpers
 A couple of ui helper modules for my apps
 
-# First you need to add jitpack.io to your repositories in the root `build.grade` file:
+First you need to add jitpack.io to your repositories in the root `build.grade` file:
 ```
 allprojects {
 	repositories {
