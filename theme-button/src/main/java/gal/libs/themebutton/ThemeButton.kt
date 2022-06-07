@@ -6,12 +6,11 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.view.View
-import androidx.core.content.res.getFontOrThrow
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.doOnLayout
 import kotlin.math.max
 
-class ThemeButton : View {
+class ThemeButton : androidx.appcompat.widget.AppCompatTextView {
 
     var text = ""
     var drawablePrimary : Drawable? = null
@@ -19,9 +18,11 @@ class ThemeButton : View {
 
     var foregroundColorPrimary = Color.BLACK
     var foregroundColorSecondary = Color.WHITE
-    var highlightColor = Color.WHITE
     var mainColor = Color.rgb(255, 161, 43)
-    var shadowColor = Color.rgb(145, 81, 0)
+    //--------------without the 1 there is an accidental override---------------
+    var highlightColor1 = Color.WHITE
+    var shadowColor1 = Color.rgb(145, 81, 0)
+    //--------------------------------------------------------------------------
     var baseColor = Color.rgb(43, 24, 0)
 
     var cornerRadius = -1F
@@ -80,8 +81,9 @@ class ThemeButton : View {
                 R.styleable.ThemeButton_android_drawable -> {
                     drawablePrimary = ta.getDrawable(attr)
                 }
-                R.styleable.ThemeButton_android_font -> {
-                    paint.typeface = ta.getFontOrThrow(attr)
+                R.styleable.ThemeButton_android_fontFamily -> {
+                    val fontId = ta.getResourceId(R.styleable.ThemeButton_android_fontFamily, 0)
+                    paint.typeface = if (fontId != 0) ResourcesCompat.getFont(context, fontId) else typeface
                 }
                 R.styleable.ThemeButton_foregroundColorPrimary -> {
                     foregroundColorPrimary = ta.getColor(attr, foregroundColorPrimary)
@@ -90,13 +92,13 @@ class ThemeButton : View {
                     foregroundColorSecondary = ta.getColor(attr, foregroundColorSecondary)
                 }
                 R.styleable.ThemeButton_highlightColor -> {
-                    highlightColor = ta.getColor(attr, highlightColor)
+                    highlightColor1 = ta.getColor(attr, highlightColor1)
                 }
                 R.styleable.ThemeButton_mainColor -> {
                     mainColor = ta.getColor(attr, mainColor)
                 }
                 R.styleable.ThemeButton_shadowColor -> {
-                    shadowColor = ta.getColor(attr, shadowColor)
+                    shadowColor1 = ta.getColor(attr, shadowColor1)
                 }
                 R.styleable.ThemeButton_baseColor -> {
                     baseColor = ta.getColor(attr, baseColor)
@@ -114,9 +116,9 @@ class ThemeButton : View {
         if (canvas == null) return
         paint.color = baseColor
         canvas.drawRoundRect(0F, height / 15f, width - 1F, height - 1F, cornerRadius, cornerRadius, paint)
-        paint.color = shadowColor
+        paint.color = shadowColor1
         canvas.drawRoundRect(height / 30F, buttonTop + height / 50F, width - height / 30F, 19 * height / 20F - 1, cornerRadius, cornerRadius, paint)
-        paint.color = highlightColor
+        paint.color = highlightColor1
         canvas.drawRoundRect(height / 30F, buttonTop, width - height / 30F, buttonTopHeight + buttonTop, cornerRadius, cornerRadius, paint)
         paint.color = mainColor
         canvas.drawRoundRect(height / 30F, buttonTop + height / 50F, width - height / 30F, buttonTopHeight + buttonTop, cornerRadius, cornerRadius, paint)
