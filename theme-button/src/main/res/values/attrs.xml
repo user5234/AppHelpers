@@ -10,5 +10,6 @@
         <attr name="foregroundColorPrimary" format="color"/>
         <attr name="foregroundColorSecondary" format="color"/>
         <attr name="cornerRadiusPercent" format="float"/>
+        <attr name="android:font"/>
     </declare-styleable>
 </resources>

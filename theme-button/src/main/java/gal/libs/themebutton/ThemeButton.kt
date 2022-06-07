@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.getFontOrThrow
 import androidx.core.view.doOnLayout
 import kotlin.math.max
 
@@ -78,6 +79,9 @@ class ThemeButton : View {
                 }
                 R.styleable.ThemeButton_android_drawable -> {
                     drawablePrimary = ta.getDrawable(attr)
+                }
+                R.styleable.ThemeButton_android_font -> {
+                    paint.typeface = ta.getFontOrThrow(attr)
                 }
                 R.styleable.ThemeButton_foregroundColorPrimary -> {
                     foregroundColorPrimary = ta.getColor(attr, foregroundColorPrimary)
