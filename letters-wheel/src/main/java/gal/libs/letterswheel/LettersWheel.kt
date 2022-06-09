@@ -19,7 +19,10 @@ class LettresWheel : AppCompatImageView {
     var letters = listOf("1", "2", "3", "4")
         set(value) {
             field = value
-            createWheelDrawable(listOf(Color.RED, Color.WHITE))
+            angle = 360F / letters.size
+            startAngle = - angle / 2
+            if (this::rect.isInitialized)
+                createWheelDrawable(listOf(Color.RED, Color.WHITE))
         }
     //the angle in each arc of the wheel
     private var angle = 360F / letters.size
