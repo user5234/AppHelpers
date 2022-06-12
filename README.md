@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 ```
 
 # Add all modules:
-```implementation "com.github.user5234:AppHelpers:1.0.1"```
+```implementation "com.github.user5234:AppHelpers:1.0.5"```
 
 # Add specific ones:
-```implementation "com.github.user5234.AppHelpers:module-name:1.0.1"```
+```implementation "com.github.user5234.AppHelpers:module-name:1.0.5"```
